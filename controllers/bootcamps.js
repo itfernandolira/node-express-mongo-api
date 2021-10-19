@@ -10,6 +10,9 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
 
   console.log(req.query);
   //const bootcamps = await Bootcamp.find(req.query);
+  /*res
+      .status(200)
+      .json({ success: true, count: bootcamps.length, data: bootcamps });*/
 
   let query;
 
@@ -28,7 +31,9 @@ exports.getBootcamps = asyncHandler(async (req, res, next) => {
 
   // Create operators ($gt, $gte, etc)
   queryStr = queryStr.replace(/\b(gt|gte|lt|lte|in)\b/g, match => `$${match}`);
-
+  //queryStr=queryStr.replace(/\"/g, "");
+  //console.log(queryStr);
+  console.log(JSON.parse(queryStr));
   query = Bootcamp.find(JSON.parse(queryStr)).populate('courses');
 
     // Select Fields
